@@ -29,4 +29,4 @@ jobs:
         echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
     - name: Push image
       if: github.ref == 'refs/heads/master'
-      run: docker push ${{ steps.build.outputs.name }}
+      run: docker push ${{ steps.build-image.outputs.image }}
