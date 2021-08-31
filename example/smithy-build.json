@@ -1,0 +1,14 @@
+{
+    "version": "1.0",
+    "plugins": {
+        "rust-codegen": {
+            "service": "org.example.hi#Hi",
+            "module": "hi",
+            "moduleVersion": "1.0.0",
+            "moduleAuthors": ["rustacean"],
+            "runtimeConfig": {
+                "relativePath": "/foo/opt/rust/"
+            }
+        }
+    }
+}
