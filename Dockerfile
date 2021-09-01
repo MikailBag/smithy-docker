@@ -12,7 +12,7 @@ RUN git checkout ${CORE_REV}
 RUN rm -rf .git
 
 FROM fetch-base as fetch-rs
-ARG RUST_REV="130703dadf2f5366dccc402e4d2cd11db7b004ad"
+ARG RUST_REV="5b8fc1ef515dd8b6530c12f1a9e1d0833412d7c1"
 RUN git clone https://github.com/awslabs/smithy-rs src
 WORKDIR /src
 RUN git checkout ${RUST_REV}
