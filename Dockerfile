@@ -54,7 +54,7 @@ RUN cp /work/smithy-typescript-codegen/build/libs/smithy-typescript-codegen-${TS
 FROM gradle:6-jdk11 as build-rs
 WORKDIR /work
 COPY --from=fetch-rs /src /work
-RUN gradle --no-daemon --console plain assemble
+RUN gradle --no-daemon --console plain codegen:assemble rust-runtime:assemble
 RUN mkdir /out
 ARG RS_CODEGEN_VERSION='0.1.0'
 ARG RS_RUNTIME_VERSION='0.0.3'
