@@ -40,6 +40,7 @@ RUN cp /work/smithy-aws-traits/build/libs/smithy-aws-traits-${CORE_VERSION}.jar 
 RUN cp /work/smithy-protocol-test-traits/build/libs/smithy-protocol-test-traits-${CORE_VERSION}.jar /out/protocol-test-traits.jar
 RUN cp /work/smithy-aws-protocol-tests/build/libs/smithy-aws-protocol-tests-${CORE_VERSION}.jar /out/protocol-tests.jar
 RUN cp /work/smithy-validation-model/build/libs/smithy-validation-model-${CORE_VERSION}.jar /out/validation.jar
+RUN cp /work/smithy-openapi/build/libs/smithy-openapi-${CORE_VERSION}.jar /out/openapi.jar
 
 FROM gradle:6-jdk11 as build-ts
 WORKDIR /work
