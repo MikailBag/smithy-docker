@@ -5,21 +5,21 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 WORKDIR /
 
 FROM fetch-base as fetch-core
-ARG CORE_REV="a9a46d2f9e5df611c5dbae52143cc165a2f3f4fc"
+ARG CORE_REV="5112fddc646abafdcd7130139a3fbf8d1668110d"
 RUN git clone https://github.com/awslabs/smithy src
 WORKDIR /src
 RUN git checkout ${CORE_REV}
 RUN rm -rf .git
 
 FROM fetch-base as fetch-rs
-ARG RUST_REV="5b8fc1ef515dd8b6530c12f1a9e1d0833412d7c1"
+ARG RUST_REV="0b32a897ed0ac9252b2bb2485b1258ac0cfd0760"
 RUN git clone https://github.com/awslabs/smithy-rs src
 WORKDIR /src
 RUN git checkout ${RUST_REV}
 RUN rm -rf .git
 
 FROM fetch-base as fetch-ts
-ARG TYPESCRIPT_REV="adf914b2707163be2b48c161dd960d47d465f789"
+ARG TYPESCRIPT_REV="def6db8293df0e7c7cdd644f865fcf78cf5b746b"
 RUN git clone https://github.com/awslabs/smithy-typescript src
 WORKDIR /src
 RUN git checkout ${TYPESCRIPT_REV}
@@ -48,7 +48,7 @@ WORKDIR /work
 COPY --from=fetch-ts /src /work
 RUN gradle --no-daemon --console plain assemble
 RUN mkdir /out
-ARG TS_VERSION='0.5.0'
+ARG TS_VERSION='0.6.0'
 RUN cp /work/smithy-typescript-codegen/build/libs/smithy-typescript-codegen-${TS_VERSION}.jar /out/ts.jar
 
 FROM gradle:6-jdk11 as build-rs
@@ -70,8 +70,7 @@ RUN cp /work/lib/build/libs/lib-all.jar /out/dummy.jar
 
 FROM scratch as jars
 COPY --from=build-core /out /jars
-# TODO
-# COPY --from=build-ts /out /jars
+COPY --from=build-ts /out /jars-ignored
 COPY --from=build-rs /out /jars
 COPY --from=build-dummy /out /jars
 
